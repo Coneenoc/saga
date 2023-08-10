@@ -1,8 +1,10 @@
-from app.app import CreateApp, web
-from routes.routs import routes
+from aiohttp import web
 
-app = CreateApp().app_instance
-app.add_routes(routes)
+async def index(request):
+    return web.Response(text="Welcome home!")
 
-if __name__ == "__main__":
-    web.run_app(app)
+
+async def my_web_app():
+    app = web.Application()
+    app.router.add_get('/', index)
+    return app
